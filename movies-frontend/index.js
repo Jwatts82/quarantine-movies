@@ -6,6 +6,31 @@ window.addEventListener("DOMContentLoaded", () => {
     getCategories()
 })
 
+function displayCreateForm() {
+    let formDiv = document.querySelector('new-category-form')
+    let html =  `
+        <form>
+            <label>Name:</label>
+            <input type="text" id="name">
+            <input type="submit">
+        </form>
+    `
+    formDiv.innerHTML = html
+    document.querySelector('form').addEventListener('sumbit', createCategory)
+}
+
+
+function clearForm() {
+    let formDiv = document.querySelector('new-category-form')
+    formDiv.innerHTML = ""
+}
+
+
+function createCategory() {
+
+
+}
+
 //categories index
 function getCategories() {
     let main = document.getElementById('main')
