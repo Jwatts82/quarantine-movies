@@ -6,6 +6,7 @@ window.addEventListener("DOMContentLoaded", () => {
     getCategories()
 })
 
+//new route category
 function displayCreateForm() {
     let formDiv = document.querySelector("#new-category-form")
     let html = `
@@ -24,11 +25,36 @@ function clearForm() {
     formDiv.innerHTML = ""
 }
 
+//create route category
 function createCategory(e) {
     e.preventDefault()
-    
-    console.log(e)
+    let main = document.getElementById('main')
+    let category = {
+        name: e.target.querySelector("#name").value
+    }
 
+    let configObj = {
+        method: 'POST',
+        body: JSON.stringify(category),
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
+
+    }
+
+    fetch(BASE_URL + '/categories', configObj)    
+    .then(res => res.json())
+    .then(category => {
+        main.innerHTML += `
+        <li>
+            <a href="#" data-id="${category.id}">${category.name}</a>
+        </li>
+        ` 
+        attachClicksToLinks()
+        clearForm()
+        }
+    )
 }
 
 //categories index
@@ -102,10 +128,12 @@ function displayCategory(e) {
         <h3>${category.name}</h3>
         <hr>
         <br>
+        <button id="delete-category" data-id="${category.id}"></button>
         `
         //category.movies.forEach
     })
 }
+
 
 /*movie show view
 function displayMovie(e) {
