@@ -82,13 +82,6 @@ function attachClicksToLinks() {
     })
 }
 
-function attachClicksToMoviesLinks() {
-    const movies = document.querySelectorAll("li a")
-    movies.forEach(movie => {
-        movie.addEventListener('click', displayMovie)
-    })
-}
-
 //category show view
 function displayCategory(e) {
     console.log(e.target)
@@ -103,7 +96,6 @@ function displayCategory(e) {
         <hr>
         <br>
         `
-        
         category.movies.forEach(movie => {
             let movieList = document.createElement('div')
             
@@ -121,8 +113,45 @@ function displayCategory(e) {
            // document.getElementById("delete-category").addEventListener('click', removeCategory)
             
         })
+        attachClicksToMoviesLinks()  
     })
 }
+
+function attachClicksToMoviesLinks() {
+    const movies = document.querySelectorAll("li a")
+    movies.forEach(movie => {
+        movie.addEventListener('click', displayMovie)
+    })
+}
+
+//movie show route
+function displayMovie(e) {
+    console.log(e.target)
+    let id = e.target.dataset.id
+    let main = document.getElementById('main') //querySelector("#main")
+    
+    main.innerHTML = ""
+    fetch(BASE_URL + `/movies/${id}`)
+    .then(resp => resp.json())
+    .then(movie => {
+
+        main.innerHTML = `
+        <h3>${movie.title}</h3>
+        <hr>
+        <br>
+        `
+            //<button id="delete-category" data-id="${category.id}">Delete</button>
+
+           // document.getElementById("delete-category").addEventListener('click', removeCategory)
+            
+        })*/
+    })
+}
+
+
+
+
+
 
 function removeCategory(event) {
     let configObj = {
