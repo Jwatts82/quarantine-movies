@@ -7,8 +7,8 @@ window.addEventListener("DOMContentLoaded", () => {
 })
 
 function displayCreateForm() {
-    let formDiv = document.querySelector('#new-category-form')
-    let html =  `
+    let formDiv = document.querySelector("#new-category-form")
+    let html = `
         <form>
             <label>Name:</label>
             <input type="text" id="name">
@@ -16,43 +16,19 @@ function displayCreateForm() {
         </form>
     `
     formDiv.innerHTML = html
-    document.querySelector('form').addEventListener('sumbit', createCategory)
+    document.querySelector('form').addEventListener('submit', createCategory)    
 }
 
-
 function clearForm() {
-    let formDiv = document.querySelector('new-category-form')
+    let formDiv = document.querySelector('#new-category-form')
     formDiv.innerHTML = ""
 }
 
-
 function createCategory(e) {
     e.preventDefault()
-    let main = document.getElementById('main')
-    let category = {
-        name: e.target.querySelector("name").value
-    }
-    let configObj = {
-        method: 'POST',
-        body: JSON.stringify(category),
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'applicaation/json'
-        }
-    }
+    
+    console.log(e)
 
-    fetch(BASE_URL + '/categories', configObj)
-    .then(res => res.json())
-    .then(category => {
-        main.innerHTML += `
-        <li>
-            <a href="#" data-id="${category.id}">${category.name}</a>
-        </li>
-        ` 
-        attachClicksToLinks()
-        clearForm()
-        }
-    )
 }
 
 //categories index
