@@ -128,10 +128,26 @@ function displayCategory(e) {
         <h3>${category.name}</h3>
         <hr>
         <br>
-        <button id="delete-category" data-id="${category.id}"></button>
+        <button id="delete-category" data-id="${category.id}">Delete</button>
         `
+        document.getElementById("delete-category").addEventListener('click', removeCategory)
         //category.movies.forEach
     })
+}
+
+function removeCategory(event) {
+    let configObj = {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
+    }
+    fetch(BASE_URL + `/categories/${event.target.dataset.id}`, configObj)
+    .then(() => {
+        console.log('deleting')
+        getCategories()}
+    )
 }
 
 
