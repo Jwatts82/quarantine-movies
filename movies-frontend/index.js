@@ -128,10 +128,24 @@ function displayCategory(e) {
         <h3>${category.name}</h3>
         <hr>
         <br>
-        <button id="delete-category" data-id="${category.id}">Delete</button>
-        `
-        document.getElementById("delete-category").addEventListener('click', removeCategory)
-        //category.movies.forEach
+        `        
+        category.movies.forEach(movie => {
+            let movieList = document.createElement('div')
+            
+            movieList.setAttribute("id", `${movie.id}`)
+
+            main.appendChild(movieList)
+
+            movieList.innerHTML += `
+            <li>
+                <a href="#" data-id="${movie.id}">${movie.title}</a>
+            </li>
+            <br>
+            <br>
+            <button id="delete-category" data-id="${category.id}">Delete</button>
+            ` 
+            document.getElementById("delete-category").addEventListener('click', removeCategory)
+        })
     })
 }
 
