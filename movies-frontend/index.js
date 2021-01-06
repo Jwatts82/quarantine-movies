@@ -1,6 +1,7 @@
 const BASE_URL = 'http://localhost:3000'
 
 window.addEventListener("DOMContentLoaded", () => {
+    document.getElementById('category-form').addEventListener('click', displayCreateForm)
     document.getElementById('categories').addEventListener('click', getCategories) //add listeners to buttons
     getCategories()
 })
@@ -9,8 +10,9 @@ window.addEventListener("DOMContentLoaded", () => {
 function getCategories() {
     let main = document.getElementById('main')
     main.innerHTML = "" //blank the page and put categories on
-    fetch(BASE_URL + '/categories')
-    .then(res => res.json())
+    //fetch(BASE_URL + '/categories')
+    //.then(res => res.json())
+    fetchCategories()
     .then(  categories => {
         categories.map(category => {
         main.innerHTML += `
@@ -23,12 +25,10 @@ function getCategories() {
     })
 }
 
-async function getchTodos() {
+async function fetchCategories() {
     let res = await fetch(BASE_URL + '/categories')
     let data = await res.json()
     return data
-
-
 }
 
 /*movies index view
