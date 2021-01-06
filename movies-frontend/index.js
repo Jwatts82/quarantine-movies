@@ -1,6 +1,7 @@
 const BASE_URL = 'http://localhost:3000'
 
 window.addEventListener("DOMContentLoaded", () => {
+    document.getElementById('categories').addEventListener('click', getCategories) //add listeners to buttons
     getCategories()
 })
 
@@ -37,7 +38,7 @@ function getMovies() {
         </li>
         ` 
     })
-    attachClicksToLinks()
+    attachClicksToMovieLinks()
     })
 } */
 
@@ -48,10 +49,48 @@ function attachClicksToLinks() {
     })
 }
 
+/*function attachClicksToMoviesLinks() {
+    const movies = document.querySelectorAll("li a")
+    movies.forEach(movie => {
+        movie.addEventListener('click', displayMovie)
+    })
+}*/
+
 //category show view
 function displayCategory(e) {
     console.log(e.target)
+    let id = e.target.dataset.id
+    let main = document.getElementById('main')
+    main.innerHTML = ""
+    fetch(BASE_URL + `/categories/${id}`)
+    .then(resp => resp.json())
+    .then(category => {
+        main.innerHTML = `
+        <h3>${category.name}</h3>
+        <hr>
+        <br>
+        `
+        //category.movies.forEach
+    })
 }
 
-
-
+/*movie show view
+function displayMovie(e) {
+    console.log(e.target)
+    let id = e.target.dataset.id
+    let main = document.getElementById('main')
+    main.innerHTML = ""
+    fetch(BASE_URL + `/movies/${id}`)
+    .then(resp => resp.json())
+    .then(movie => {
+        main.innerHTML = `
+        <h3>${movie.name}</h3>
+        <hr>
+        <br>
+        <h2>${movie.description}</h2>
+        <br>
+        <p>${movie.watched ? "Watched" : "Not Watched"}</p>
+        `
+        //category.movies.forEach
+    })
+}*/
