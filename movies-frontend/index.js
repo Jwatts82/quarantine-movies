@@ -61,9 +61,8 @@ function createCategory(e) {
 function getCategories() {
     let main = document.getElementById('main')
     main.innerHTML = "" //blank the page and put categories on
-    //fetch(BASE_URL + '/categories')
-    //.then(res => res.json())
-    fetchCategories()
+    fetch(BASE_URL + '/categories')
+    .then(res => res.json())
     .then(  categories => {
         categories.map(category => {
         main.innerHTML += `
@@ -76,31 +75,6 @@ function getCategories() {
     })
 }
 
-async function fetchCategories() {
-    let res = await fetch(BASE_URL + '/categories')
-    let data = await res.json()
-    return data
-}
-
-/*movies index view
-function getMovies() {
-    let main = document.getElementById('main')
-    main.innerHTML = "" //blank the page and put movies on
-    fetch(BASE_URL + '/movies')
-    .then(res => res.json())
-    .then(  movies => {
-        movies.map(movie => {
-        main.innerHTML += `
-        <li>
-            <a href="#" data-id="${movie.id}">${movie.title}</a>
-            - ${movie.watched ? "Watched" : "Not Watched"}
-        </li>
-        ` 
-    })
-    attachClicksToMovieLinks()
-    })
-} */
-
 function attachClicksToLinks() {
     const categories = document.querySelectorAll("li a")
     categories.forEach(category => {
@@ -108,12 +82,12 @@ function attachClicksToLinks() {
     })
 }
 
-/*function attachClicksToMoviesLinks() {
+function attachClicksToMoviesLinks() {
     const movies = document.querySelectorAll("li a")
     movies.forEach(movie => {
         movie.addEventListener('click', displayMovie)
     })
-}*/
+}
 
 //category show view
 function displayCategory(e) {
@@ -128,7 +102,8 @@ function displayCategory(e) {
         <h3>${category.name}</h3>
         <hr>
         <br>
-        `        
+        `
+        
         category.movies.forEach(movie => {
             let movieList = document.createElement('div')
             
@@ -140,11 +115,11 @@ function displayCategory(e) {
             <li>
                 <a href="#" data-id="${movie.id}">${movie.title}</a>
             </li>
-            <br>
-            <br>
-            <button id="delete-category" data-id="${category.id}">Delete</button>
             ` 
-            document.getElementById("delete-category").addEventListener('click', removeCategory)
+            //<button id="delete-category" data-id="${category.id}">Delete</button>
+
+           // document.getElementById("delete-category").addEventListener('click', removeCategory)
+            
         })
     })
 }
@@ -165,8 +140,8 @@ function removeCategory(event) {
 }
 
 
-/*movie show view
-function displayMovie(e) {
+//movie show view
+/*function displayMovie(e) {
     console.log(e.target)
     let id = e.target.dataset.id
     let main = document.getElementById('main')
