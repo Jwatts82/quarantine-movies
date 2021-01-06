@@ -23,6 +23,14 @@ function getCategories() {
     })
 }
 
+async function getchTodos() {
+    let res = await fetch(BASE_URL + '/categories')
+    let data = await res.json()
+    return data
+
+
+}
+
 /*movies index view
 function getMovies() {
     let main = document.getElementById('main')
