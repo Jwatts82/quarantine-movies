@@ -12,7 +12,7 @@ function getCategories() {
     .then(res => res.json())
     .then(  categories => {
         categories.map(category => {
-         `
+        main.innerHTML += `
         <li>
             <a href="#" data-id="${category.id}">${category.name}</a>
         </li>
@@ -22,7 +22,7 @@ function getCategories() {
     })
 }
 
-//movies index view
+/*movies index view
 function getMovies() {
     let main = document.getElementById('main')
     main.innerHTML = "" //blank the page and put movies on
@@ -39,13 +39,18 @@ function getMovies() {
     })
     attachClicksToLinks()
     })
-}
+} */
 
 function attachClicksToLinks() {
     const categories = document.querySelectorAll("li a")
     categories.forEach(category => {
         category.addEventListener('click', displayCategory)
     })
+}
+
+//category show view
+function displayCategory(e) {
+    console.log(e.target)
 }
 
 
