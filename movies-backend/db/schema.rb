@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2021_01_06_034202) do
     t.string "title"
     t.string "description"
     t.boolean "watched"
+    t.integer "category_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

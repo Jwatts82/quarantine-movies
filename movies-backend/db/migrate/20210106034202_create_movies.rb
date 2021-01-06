@@ -4,6 +4,7 @@ class CreateMovies < ActiveRecord::Migration[6.0]
       t.string :title
       t.string :description
       t.boolean :watched
+      t.integer :category_id
 
       t.timestamps
     end
