@@ -34,7 +34,9 @@ class MoviesController < ApplicationController
   end
 
   # DELETE /movies/1
+  
   def destroy
+    #binding.pry
     @movie.destroy
   end
 

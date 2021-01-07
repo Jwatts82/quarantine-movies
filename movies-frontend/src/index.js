@@ -1,10 +1,13 @@
-const BASE_URL = 'http://localhost:3000'
+//const BASE_URL = 'http://localhost:3000'
 
-window.addEventListener("DOMContentLoaded", () => {
-    document.getElementById('category-form').addEventListener('click', displayCreateForm)
-    document.getElementById('categories').addEventListener('click', getCategories) //add listeners to buttons
-    getCategories()
-})
+//window.addEventListener("DOMContentLoaded", () => {
+  //  document.getElementById('category-form').addEventListener('click', displayCreateForm)
+    //document.getElementById('categories').addEventListener('click', getCategories) //add listeners to buttons
+    //getCategories()
+//})
+
+
+
 
 //new route category
 function displayCreateForm() {
@@ -18,11 +21,6 @@ function displayCreateForm() {
     `
     formDiv.innerHTML = html
     document.querySelector('form').addEventListener('submit', createCategory)    
-}
-
-function clearForm() {
-    let formDiv = document.querySelector('#new-category-form')
-    formDiv.innerHTML = ""
 }
 
 //create route category
@@ -61,9 +59,10 @@ function createCategory(e) {
 function getCategories() {
     let main = document.getElementById('main')
     main.innerHTML = "" //blank the page and put categories on
-    fetch(BASE_URL + '/categories')
-    .then(res => res.json())
-    .then(  categories => {
+    fetch(BASE_URL + '/categories') //
+    .then(res => res.json()) //
+    //fetchCategories
+    .then(categories => {
         categories.map(category => {
         main.innerHTML += `
         <li>
@@ -74,6 +73,13 @@ function getCategories() {
         attachClicksToLinks()    
     })
 }
+
+//async
+//async function fetchCategories(){
+  //  let res = await fetch(BASE_URL + '/categories')
+  //  let data = await res.json()
+  //  return data
+//}
 
 function attachClicksToLinks() {
     const categories = document.querySelectorAll("li a")
@@ -107,20 +113,12 @@ function displayCategory(e) {
             <li>
                 <a href="#" data-id="${movie.id}">${movie.title}</a>
             </li>
-            ` 
-            //<button id="delete-category" data-id="${category.id}">Delete</button>
+            <button id="delete-movie" data-id="${movie.id}">Delete</button>
 
-           // document.getElementById("delete-category").addEventListener('click', removeCategory)
-            
+            `             
+            //document.getElementById('delete-movie').addEventListener('click', removeMovie)
         })
         attachClicksToMoviesLinks()  
-    })
-}
-
-function attachClicksToMoviesLinks() {
-    const movies = document.querySelectorAll("li a")
-    movies.forEach(movie => {
-        movie.addEventListener('click', displayMovie)
     })
 }
 
@@ -139,21 +137,17 @@ function displayMovie(e) {
         <h3>${movie.title}</h3>
         <hr>
         <br>
-        `
-            //<button id="delete-category" data-id="${category.id}">Delete</button>
 
-           // document.getElementById("delete-category").addEventListener('click', removeCategory)
-            
-        })*/
+        <h4>Description:</h4>
+        <h4>${movie.description}</h4>
+        <br>
+        `
     })
 }
 
+// delete - delete movie 2
 
-
-
-
-
-function removeCategory(event) {
+/*function removeMovie(event){
     let configObj = {
         method: 'DELETE',
         headers: {
@@ -161,31 +155,77 @@ function removeCategory(event) {
             'Accept': 'application/json'
         }
     }
-    fetch(BASE_URL + `/categories/${event.target.dataset.id}`, configObj)
-    .then(() => {
-        console.log('deleting')
-        getCategories()}
+    fetch(BASE_URL + `/movies/${event.target.dataset.id}`, configObj)
+        .then(getCategories())
+    
+}*/
+
+
+//new route movie
+function displayMovieForm() {
+    let formDiv = document.querySelector("#new-movie-form")
+    let html = `
+        <form>
+            <label>Title:</label>
+            <input type="text" id="title">
+            <label>Description:</label>
+            <input type="text" id="description">
+            <label>Watched:</label>
+            <input type="checkbox" id="watched"></input>
+            <input type="submit">
+        </form>
+    `
+    formDiv.innerHTML = html
+    document.querySelector('form').addEventListener('submit', createMovie)    
+}
+
+//create route movie
+function createMovie(e) {
+    e.preventDefault()
+    let main = document.getElementById('main')
+    let movie = {
+        title: e.target.querySelector("#title").value
+    }
+
+    let configObj = {
+        method: 'POST',
+        body: JSON.stringify(movie),
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
+
+    }
+
+    fetch(BASE_URL + '/movies', configObj)    
+    .then(res => res.json())
+    .then(movie => {
+        main.innerHTML += `
+        <li>
+            <a href="#" data-id="${movie.id}">${movie.title}</a>
+        </li>
+        ` 
+        attachClicksToCreateMovie()
+        clearForm()
+        }
     )
 }
 
-
-//movie show view
-/*function displayMovie(e) {
-    console.log(e.target)
-    let id = e.target.dataset.id
-    let main = document.getElementById('main')
-    main.innerHTML = ""
-    fetch(BASE_URL + `/movies/${id}`)
-    .then(resp => resp.json())
-    .then(movie => {
-        main.innerHTML = `
-        <h3>${movie.name}</h3>
-        <hr>
-        <br>
-        <h2>${movie.description}</h2>
-        <br>
-        <p>${movie.watched ? "Watched" : "Not Watched"}</p>
-        `
-        //category.movies.forEach
+function attachClicksToMoviesLinks() {
+    const movies = document.querySelectorAll("li a")
+    movies.forEach(movie => {
+        movie.addEventListener('click', removeMovie)
     })
-}*/
+}
+
+function attachClicksToCreateMovie() {
+    const movies = document.querySelectorAll("li a")
+    movies.forEach(movie => {
+        movie.addEventListener('click', displayMovie)
+    })
+}
+
+function clearForm() {
+    let formDiv = document.querySelector('#new-category-form')
+    formDiv.innerHTML = ""
+}
