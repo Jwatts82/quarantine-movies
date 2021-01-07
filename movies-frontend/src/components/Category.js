@@ -17,9 +17,10 @@ class Category {
         return `
             <h3>${this.name}</h3>
             <hr>
-            <br>
+            
             <button id="delete-category" data-id="${this.id}">Delete Category</button>
-
+            <br>
+            <br>
             `
     }
 }

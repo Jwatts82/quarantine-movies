@@ -13,17 +13,19 @@ class Movie {
         <a href="#" data-id="${this.id}">${this.title}</a> 
         </li>
         <br>
+        <button id="create-movie" data-id="${movie.id}">Add Movie</button>
+
         `
     }
 
     renderMovie() {
         return `
-        <h3>${movie.title}</h3>
+        <h3>${this.title}</h3>
         <hr>
         <br>
 
         <h4>Description:</h4>
-        <h4>${movie.description}</h4>
+        <h4>${this.description}</h4>
         <br>
         <p>${this.watched ? "Watched" : "Not Watched Yet"}.</p>
         <br>

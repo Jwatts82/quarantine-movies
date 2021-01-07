@@ -28,10 +28,8 @@ async function renderMovies() {
         const newMovie = new Movie(movie)
         main.innerHTML += newMovie.render()
     })
-    attachClicksToMoviesLinks()
 }
 
-//new category
 function displayCreateForm() {
     let formDiv = document.querySelector("#new-category-form")
     let html = `
@@ -45,7 +43,6 @@ function displayCreateForm() {
     document.querySelector('form').addEventListener('submit', createCategory)    
 }
 
-//new movie
 function displayMovieForm() {
     let formDiv = document.querySelector("#new-movie-form")
     let html = `
@@ -93,8 +90,6 @@ async function createMovie(e) {
     clearForm()
 }
 
-
-//movie show route
 async function displayMovie(e) {
     console.log(e.target)
     let id = e.target.dataset.id
@@ -103,6 +98,8 @@ async function displayMovie(e) {
     const movie = new Movie(data)
     main.innerHTML = movie.renderMovie()
     document.getElementById('delete-movie').addEventListener('click', removeMovie)
+
+    //document.getElementById('add-Movie').addEventListener('click', removeCategory)
 }
 
 async function displayCategory(e){
@@ -119,18 +116,18 @@ async function displayCategory(e){
             <br>
             `
         })
+        attachClicksToMoviesLinks()
     }
-    document.getElementById('delete-category').addEventListener('click', removeCategory)
-
+    //document.getElementById('delete-category').addEventListener('click', removeCategory)
 }
 
-async function removeMovie(event) {
+/*async function removeMovie(event) {
     let id = e.target.dataset.id
     const data = await apiService.fetchRemoveMovie(id)
     .then(data => {
         renderMovies()
     })
-}
+}*/
 
 async function removeCategory(event) {
     let id = event.target.dataset.id
@@ -143,16 +140,16 @@ async function removeCategory(event) {
 function attachClicksToMoviesLinks() {
     const movies = document.querySelectorAll("li a")
     movies.forEach(movie => {
-        movie.addEventListener('click', removeMovie)
+        movie.addEventListener('click', displayMovie)
     })
 }
 
-function attachClicksToCreateMovie() {
+/*function attachClicksToCreateMovie() {
     const movies = document.querySelectorAll("li a")
     movies.forEach(movie => {
         movie.addEventListener('click', displayMovie)
     })
-}
+}*/
 
 function attachClicksToLinks() {
     const categories = document.querySelectorAll("li a")
@@ -169,32 +166,8 @@ function clearForm() {
 init()
 
 
-/*main.innerHTML = ""
-    fetch(BASE_URL + `/categories/${id}`)
-    .then(resp => resp.json())
-    .then(category => {
-        main.innerHTML = `
-        <h3>${category.name}</h3>
-        <hr>
-        <br>
-        `
-        category.movies.forEach(movie => {
-            let movieList = document.createElement('div')
-            
-            movieList.setAttribute("id", `${movie.id}`)
-
-            main.appendChild(movieList)
-
-            movieList.innerHTML += `
-            <li>
-                <a href="#" data-id="${movie.id}">${movie.title}</a>
-            </li>
-            <button id="delete-movie" data-id="${movie.id}">Delete</button>
-
-            `             
-            //document.getElementById('delete-movie').addEventListener('click', removeMovie)
-        })
-        attachClicksToMoviesLinks()  
-    })
-
-}*/
+/*
+    
+    <a href="#" data-id="${movie.id}">${movie.title}</a>           
+    attachClicksToMoviesLinks()  
+*/
