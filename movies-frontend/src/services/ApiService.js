@@ -45,7 +45,7 @@ class ApiService {
     async fetchCreateMovie(movieData) {
         let configObj = {
             method: 'POST',
-            body: JSON.stringify(categoryData),
+            body: JSON.stringify(movieData),
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'

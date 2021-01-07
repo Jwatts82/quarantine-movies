@@ -1,7 +1,7 @@
 class Movie {
     constructor(data) {
         this.id = data.id
-        this.category_id = data.category_id
+        this.category_id = data.category.id
         this.title = data.title
         this.description = data.description
         this.watched = data.watched
@@ -29,7 +29,7 @@ class Movie {
         <br>
         <p>${this.watched ? "Watched" : "Not Watched Yet"}.</p>
         <br>
-        <button id="delete-movie" data-id="${this.id}">Delete Movie</button>
+        <button id="delete-movie" data-id="${this.id}" data-category-id="${this.category_id}">Delete Movie</button>
         `
     }
 }

@@ -43,10 +43,11 @@ function displayCreateForm() {
     document.querySelector('form').addEventListener('submit', createCategory)    
 }
 
-function displayMovieForm() {
-    let formDiv = document.querySelector("#new-movie-form")
+function displayMovieForm() { 
+    let formDiv = document.querySelector("#add-movie-div")
     let html = `
         <form>
+            <input type="hidden" id="categoryId" value="${"#category_id"}">
             <label>Title:</label>
             <input type="text" id="title">
             <label>Description:</label>
@@ -78,6 +79,7 @@ async function createMovie(e) {
     e.preventDefault()
     let main = document.getElementById('main')
     let movie = {
+        categoryId: e.target.querySelector("#category_id").value, //?? cannot read value
         title: e.target.querySelector("#title").value,
         description: e.target.querySelector("#description").value,
         watched: e.target.querySelector("#watched").value,
@@ -93,49 +95,56 @@ async function createMovie(e) {
 async function displayMovie(e) {
     console.log(e.target)
     let id = e.target.dataset.id
-
+    
     const data = await apiService.fetchMovie(id)
     const movie = new Movie(data)
     main.innerHTML = movie.renderMovie()
-    document.getElementById('delete-movie').addEventListener('click', removeMovie)
-
-    //document.getElementById('add-Movie').addEventListener('click', removeCategory)
+    document.getElementById('delete-movie').addEventListener('click', removeMovie) 
 }
 
-async function displayCategory(e){
-    console.log(e.target)
-    let id = e.target.dataset.id
+async function displayCategory(id){
     
     const data = await apiService.fetchCategory(id)
     const category = new Category(data)
     main.innerHTML = category.renderCategory()
+
     if (category.movies) {
         category.movies.forEach(movie => {
             main.innerHTML += `
-            <li><a href="#" data-id="${movie.id}">${movie.title}</a></li>
+            <li><a href="#" data-id="${movie.id}" data-category-id="${category.id}" >${movie.title}</a></li>
             <br>
             `
         })
         attachClicksToMoviesLinks()
     }
-    //document.getElementById('delete-category').addEventListener('click', removeCategory)
+    document.getElementById('add-movie').addEventListener('click', displayMovieForm)
+    clearForm()
 }
 
-/*async function removeMovie(event) {
+async function removeMovie(e) {
+    let categoryId = e.target.dataset.categoryId
     let id = e.target.dataset.id
     const data = await apiService.fetchRemoveMovie(id)
     .then(data => {
-        renderMovies()
+        renderCategories()
     })
-}*/
+    //.then(displayCategory(categoryId)) need to get back to category not categories
+}
 
-async function removeCategory(event) {
+/*async function removeCategory(event) {
     let id = event.target.dataset.id
     const data = await apiService.fetchRemoveCategory(id)
     .then(data => {
-        renderCategories()
+        renderCategory()
     })
-} 
+} */
+
+function attachClicksToLinks() {
+    const categories = document.querySelectorAll("li a")
+    categories.forEach(category => {
+        category.addEventListener('click', (e) => displayCategory(e.target.dataset.id))
+    })
+}
 
 function attachClicksToMoviesLinks() {
     const movies = document.querySelectorAll("li a")
@@ -151,23 +160,9 @@ function attachClicksToMoviesLinks() {
     })
 }*/
 
-function attachClicksToLinks() {
-    const categories = document.querySelectorAll("li a")
-    categories.forEach(category => {
-        category.addEventListener('click', displayCategory)
-    })
-}
-
 function clearForm() {
     let formDiv = document.querySelector('#new-category-form')
     formDiv.innerHTML = ""
 }
 
 init()
-
-
-/*
-    
-    <a href="#" data-id="${movie.id}">${movie.title}</a>           
-    attachClicksToMoviesLinks()  
-*/

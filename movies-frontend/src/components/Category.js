@@ -18,9 +18,14 @@ class Category {
             <h3>${this.name}</h3>
             <hr>
             
-            <button id="delete-category" data-id="${this.id}">Delete Category</button>
+            <div id="add-movie-div">
+                <button id="add-movie" data-id="${this.id}">Add Movie</button>
+            </div>
             <br>
             <br>
             `
     }
 }
+
+//<button id="delete-category" data-id="${this.id}">Delete Category</button>
+
