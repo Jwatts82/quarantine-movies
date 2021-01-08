@@ -52,7 +52,7 @@ class ApiService {
             }
         }
 
-        let res = await fetch(this.baseURL + `/movies`, configObj)
+        let res = await fetch(this.baseURL + '/movies', configObj)
         let data = await res.json()
         return data
     }
@@ -80,6 +80,7 @@ class ApiService {
 
         let res = await fetch(this.baseURL + `/movies/${id}`, configObj)
     }
+    
 
 }
 

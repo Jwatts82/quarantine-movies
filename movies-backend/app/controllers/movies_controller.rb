@@ -1,7 +1,7 @@
 class MoviesController < ApplicationController
   before_action :set_movie, only: [:show, :update, :destroy]
 
-  # GET /movies
+   #GET /movies
   def index
     @movies = Movie.all
 
@@ -15,16 +15,17 @@ class MoviesController < ApplicationController
 
   # POST /movies
   def create
+    #binding.pry
     @movie = Movie.new(movie_params)
 
     if @movie.save
-      render json: @movie, status: :created, location: @movie
+      render json: @movie
     else
       render json: @movie.errors, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /movies/1
+   #PATCH/PUT /movies/1
   def update
     if @movie.update(movie_params)
       render json: @movie
@@ -48,6 +49,6 @@ class MoviesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def movie_params
-      params.require(:movie).permit(:title, :description, :watched)
+      params.require(:movie).permit(:title, :description, :watched, :category_id)
     end
 end

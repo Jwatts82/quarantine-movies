@@ -27,10 +27,11 @@ class Movie {
         <h4>Description:</h4>
         <h4>${this.description}</h4>
         <br>
-        <p>${this.watched ? "Watched" : "Not Watched Yet"}.</p>
+        <h5>${this.watched ? "Watched" : "Not Watched Yet"}.</h5>
         <br>
         <button id="delete-movie" data-id="${this.id}" data-category-id="${this.category_id}">Delete Movie</button>
         `
     }
+
 }
 

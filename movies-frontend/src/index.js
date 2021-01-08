@@ -43,11 +43,12 @@ function displayCreateForm() {
     document.querySelector('form').addEventListener('submit', createCategory)    
 }
 
-function displayMovieForm() { 
-    let formDiv = document.querySelector("#add-movie-div")
+function displayMovieForm(e) { 
+
+    let formDiv = document.querySelector("#add-movie-div") /////////////////////
     let html = `
         <form>
-            <input type="hidden" id="categoryId" value="${"#category_id"}">
+            <input type="hidden" id="categoryId" value="${e.target.dataset.id}">
             <label>Title:</label>
             <input type="text" id="title">
             <label>Description:</label>
@@ -77,9 +78,11 @@ async function createCategory(e) {
 
 async function createMovie(e) {
     e.preventDefault()
+
+    const categoryId = document.querySelector("#add-movie").dataset.id
     let main = document.getElementById('main')
     let movie = {
-        categoryId: e.target.querySelector("#category_id").value, //?? cannot read value
+        category_id: categoryId, 
         title: e.target.querySelector("#title").value,
         description: e.target.querySelector("#description").value,
         watched: e.target.querySelector("#watched").value,
@@ -87,7 +90,7 @@ async function createMovie(e) {
 
     let data = await apiService.fetchCreateMovie(movie)
     let newMovie = new Movie(data)
-    main.innerHTML += newMovie.render()
+    main.innerHTML = newMovie.renderMovie()  //////////////////////////////// render()
     attachClicksToCreateMovie()
     clearForm()
 }
@@ -126,7 +129,7 @@ async function removeMovie(e) {
     let id = e.target.dataset.id
     const data = await apiService.fetchRemoveMovie(id)
     .then(data => {
-        renderCategories()
+        displayCategory(categoryId)
     })
     //.then(displayCategory(categoryId)) need to get back to category not categories
 }
@@ -153,12 +156,12 @@ function attachClicksToMoviesLinks() {
     })
 }
 
-/*function attachClicksToCreateMovie() {
+function attachClicksToCreateMovie() {
     const movies = document.querySelectorAll("li a")
     movies.forEach(movie => {
         movie.addEventListener('click', displayMovie)
     })
-}*/
+}
 
 function clearForm() {
     let formDiv = document.querySelector('#new-category-form')

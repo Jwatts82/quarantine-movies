@@ -1,0 +1,78 @@
+h1 a, h2 a, h3 a, h5 a, h6 a {
+    color: inherit;
+    text-decoration: none;
+    border: 0;
+}
+
+h1 {
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif, Arial, Helvetica, sans-serif; 
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 400;
+    text-align:center;
+    color:darkorchid;
+    letter-spacing: 4px;
+    margin: 0 0 1.5em 0;
+    border: 0;
+}
+
+h2 {
+    font-size: 1.65em;
+    font-weight: 400;
+    letter-spacing: 4px;
+    margin: 0 0 .25em 0;
+    line-height: 2.75em;
+}
+
+h3 {
+    font-size: 1.3em;
+    font-weight: 600;
+    letter-spacing: 2px;
+    margin: 0 0 .20em 0;
+    line-height: 2.75em;
+}
+h4 {
+   font-family: 'Source Sans Pro';
+   font-weight: 300;
+   color: rgb(63, 62, 62);
+   font-size: 1.25em;
+   letter-spacing: 2px;
+   margin: 0 0 1.25em 0;
+}
+
+h5 {
+    font-family: 'Source Sans Pro';
+    font-weight: 600;
+    color: rgb(63, 62, 62);
+    font-size: 1.25em;
+    letter-spacing: 2px;
+    margin: 0 0 1.25em 0;
+}
+
+a {
+    text-decoration:none;
+    border-bottom: solid 1px #ddd;
+}
+
+body {
+    background-color: #ffffff;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+hr {
+    border: 0;
+    border-top: solid 2px rgb(0, 0, 0);
+}
+
+li {
+    font-family: 'Source Sans Pro';
+    font-weight: 300;
+    color: #777;
+    font-size: 1em;
+    letter-spacing: 2px;
+    margin: 0 0 1.25em 0;
+    text-indent: 20px;
+    color:rgb(0, 0, 0)
+}
+ 
