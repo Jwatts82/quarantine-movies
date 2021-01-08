@@ -1,24 +1,26 @@
 # README
+# My Quarantine Movies
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Welcome to My Quarantine Movies, a JavaScript application with a Rails API, which allows you to create multiple movie categories and populate movies to watch in quarantine.
 
-Things you may want to cover:
 
-* Ruby version
+## Installation
 
-* System dependencies
 
-* Configuration
+In order to succesfully run the application, make sure you have installed all of the necessary gems by running the following:
 
-* Database creation
 
-* Database initialization
 
-* How to run the test suite
+ ``$ bundle install``
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+ ## Usage
+ 
 
-* ...
+In order to start the server for the application, enter the following line in your terminal:
+
+
+``$ rails s``
+
+
+Next, open the file ``index.html`` in your browser and enjoy using Quarantine Movies!
