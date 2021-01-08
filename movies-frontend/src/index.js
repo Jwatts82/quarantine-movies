@@ -85,7 +85,7 @@ async function createMovie(e) {
         category_id: categoryId, 
         title: e.target.querySelector("#title").value,
         description: e.target.querySelector("#description").value,
-        watched: e.target.querySelector("#watched").value,
+        watched: e.target.querySelector("#watched").checked,
     }
 
     let data = await apiService.fetchCreateMovie(movie)
