@@ -8,7 +8,7 @@ const init = () => {
 
 function bindEventListeners() {
     document.getElementById('category-form').addEventListener('click', displayCreateForm)
-    document.getElementById('categories').addEventListener('click', renderCategories) //add listeners to buttons
+    document.getElementById('categories').addEventListener('click', renderCategories)
 }
 
 async function renderCategories() {
@@ -45,7 +45,7 @@ function displayCreateForm() {
 
 function displayMovieForm(e) { 
 
-    let formDiv = document.querySelector("#add-movie-div") /////////////////////
+    let formDiv = document.querySelector("#add-movie-div") 
     let html = `
         <form>
             <input type="hidden" id="categoryId" value="${e.target.dataset.id}">
@@ -90,15 +90,14 @@ async function createMovie(e) {
 
     let data = await apiService.fetchCreateMovie(movie)
     let newMovie = new Movie(data)
-    main.innerHTML = newMovie.renderMovie()  //////////////////////////////// render()
+    main.innerHTML = newMovie.renderMovie() 
     attachClicksToCreateMovie()
     clearForm()
 }
 
 async function displayMovie(e) {
-    console.log(e.target)
     let id = e.target.dataset.id
-    
+
     const data = await apiService.fetchMovie(id)
     const movie = new Movie(data)
     main.innerHTML = movie.renderMovie()
@@ -114,7 +113,7 @@ async function displayCategory(id){
     if (category.movies) {
         category.movies.forEach(movie => {
             main.innerHTML += `
-            <li><a href="#" data-id="${movie.id}" data-category-id="${category.id}" >${movie.title}</a></li>
+            <li><a href="#" data-id="${movie.id}" data-category-id="${category.id}" >${movie.title}</a> -${movie.watched ? "Watchecd" : "Not Watched"}</li>
             <br>
             `
         })
@@ -122,6 +121,12 @@ async function displayCategory(id){
     }
     document.getElementById('add-movie').addEventListener('click', displayMovieForm)
     clearForm()
+    //document.getElementById('alert').addEventListener('click', moviesInCategory)
+}
+
+function moviesInCategory() {
+    document.querySelectorAll("li a").length
+    
 }
 
 async function removeMovie(e) {
@@ -131,16 +136,7 @@ async function removeMovie(e) {
     .then(data => {
         displayCategory(categoryId)
     })
-    //.then(displayCategory(categoryId)) need to get back to category not categories
 }
-
-/*async function removeCategory(event) {
-    let id = event.target.dataset.id
-    const data = await apiService.fetchRemoveCategory(id)
-    .then(data => {
-        renderCategory()
-    })
-} */
 
 function attachClicksToLinks() {
     const categories = document.querySelectorAll("li a")

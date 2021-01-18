@@ -17,7 +17,6 @@ class Category {
         return `
             <h3>${this.name}</h3>
             <button id="add-movie" data-id="${this.id}">Add Movie</button>
-
             <hr>
             
             <div id="add-movie-div">
@@ -28,5 +27,4 @@ class Category {
     }
 }
 
-//<button id="delete-category" data-id="${this.id}">Delete Category</button>
-
+//<button id="alert" data-id="${this.id}">Movies in Category</button>
